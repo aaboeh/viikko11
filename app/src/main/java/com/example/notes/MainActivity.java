@@ -14,17 +14,27 @@ public class MainActivity extends AppCompatActivity {
     private ListGrocery groceryList;
     private RecyclerView recyclerView;
 
+    private GroceryListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         groceryList = ListGrocery.getInstance();
-        ArrayList<Grocery> groceries = groceryList.getGroceries();
+        adapter = new GroceryListAdapter(getApplicationContext(), groceryList.getGroceries());
+        //ArrayList<Grocery> groceries = groceryList.getGroceries();
         recyclerView = findViewById(R.id.rvGroceries);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new GroceryListAdapter(getApplicationContext(), groceries));
+        recyclerView.setAdapter(adapter);
+        //onResume();
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 
     public void switchToAddGrocery(View view) {

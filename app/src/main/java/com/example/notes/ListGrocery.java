@@ -21,5 +21,27 @@ public class ListGrocery {
         groceries.add(grocery);
     }
 
+    public Grocery getGroceryByName(String name) {
+        int i = 0;
+        for (Grocery g : groceries) {
+            if (g.getName().equals(name)) {
+                return g;
+            }
+            i++;
+        }
+        return null;
+    }
+
+    public void removeGrocery(String name) {
+        int i = 0;
+        for (Grocery g : groceries) {
+            if(g.getName().equals(name)) {
+                break;
+            }
+            i++;
+        }
+        groceries.remove(i);
+    }
+
 
 }
